@@ -1,4 +1,4 @@
-# BA-Ordu-Vyshinskaya-Orienting-Complete-Graphs
+# Project Orienting Complete Graphs
 
 Graphs are a fundamental concept in computer science and serve as powerful models for a wide range of real-world structures and problems. Studying graphs remains an important area of research.
 
