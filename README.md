@@ -1,35 +1,37 @@
 # BA-Ordu-Vyshinskaya-Orienting-Complete-Graphs
 
-## Projektaufbau
+Graphs are a fundamental concept in computer science and serve as powerful models for a wide range of real-world structures and problems. Studying graphs remains an important area of research.
+
+This project focuses on **complete undirected graphs**, where every pair of vertices is connected by exactly one undirected edge. The central objective is to **orient** the edges of such a graph—that is, assign a direction to each edge—such that the **oriented dilation** of the resulting directed graph is minimized.  For more information on oriented dilation, see [this] (https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ESA.2023.26).
+
+## Implemented Algorithms
+
+The project implements and compares three main orientation algorithms:
+
+1. 2-Approximation Algorithm
+2. Greedy Edges Orientation
+3. SAT Solver-Based Approach using CP-SAT-Solver 
+
+## Features
+
+In addition, the project includes:
+
+- Utilities for input and output handling
+- Algorithms for computing the oriented dilation
+- A framework for running and evaluating experimental setups
+
+## Technologies
+
+- Language: Java  
+- Build Tool: Maven  
+- Testing: JUnit
+
+
+### Projektaufbau
 
 Dieses Projekt nutzt JDK 21. In unserer Erfahrung funktioniert ortools zur Lösung eines SAT-Modells mit früheren JDK Versionen nicht.
 
-Dies ist ein `maven`-Projekt. Nachdem das Projekt geöffnet wurde, sollte die Entwicklungsumgebung (InteliJ) das Maven-Skript 
-automatisch erkennen und nachfragen, ob es geladen werden soll. Nach dem Bestätigen wird das Skript eingebunden, wodurch 
-die Klassen direkt ausführbar sind. Je nach Einstellung kann dies auch automatisch ohne Nachfrage erfolgen.
-
-Falls IntelliJ das Projekt nicht automatisch als Maven-Projekt erkennt (falls Main nicht ausführbar ist), 
-muss man die Scripte manuell laden:
-
-1. `pom.xml` als Maven-Projekt importieren
-
- Klicke im Projektbaum mit der **rechten Maustaste** auf die Datei `pom.xml`.
- Wähle "Add as Maven Project" aus dem Kontextmenü.
-
-2. Maven-Projekt synchronisieren
-
- Öffne die Maven-Toolleiste (normalerweise auf der rechten Seite, Symbol: kleines „m“).
- Klicke auf das Aktualisieren-Symbol oder wähle "Reload All Maven Projects".
-
-3. Fehlende Abhängigkeiten laden (falls nötig)
-
- Falls beim Build oder Start Fehlermeldungen zu fehlenden Dependencies erscheinen:
-
- Gehe zu `File > Invalidate Caches / Restart`.
- Wähle "Invalidate and Restart".
- Nach dem Neustart erneut das Maven-Projekt synchronisieren (wie oben beschrieben).
-
-## Punktmengen
+### Punktmengen
 
 Importiere: 
 ```java
@@ -61,7 +63,7 @@ List<Point> points = PointGenerator.generateConvexPoints(r, size);
 
 Falls `r = 0` angegeben wird, wird der Radius zufällig generiert.
 
-## Projektstruktur
+### Projektstruktur
 
 In der folgenden Tabelle sind die vier Hauptalgorithmen und ihre main-Methoden aufgelistet. Weitere Klassen stellen
 entweder Hilfsklassen oder andere Versionen der Algorithmen dar, z.B. wie `SAT` und `SAT34`.
@@ -77,7 +79,7 @@ In der Dokumentation zu jeder Klasse ist angegeben, welcher Algorithmus dort imp
 
 Package `GreedyVersions` enthält andere Versionen der beiden gierigen Algorithmen, die sich nach unseren Experimenten nicht durchgesetzt haben.
 
-## Brute-Force-Algorithmus
+### Brute-Force-Algorithmus
 
 Importiere: 
 ```java
@@ -90,7 +92,7 @@ Die Methode `bruteforce()` in der Klasse `BruteforceAlgorithm` liefert die beste
 double dilation = BruteforceAlgorithm.bruteforce(points);
 ```
 
-## SAT-Modellierung
+### SAT-Modellierung
 
 Das folgende Modell betrachtet geschlossenen Wege mit 3 bis n Kanten. Dabei werden die Wege mit i Kanten erst betrachtet,
 wenn das Model für i-1 nicht gelöst wurde.
@@ -134,7 +136,7 @@ Anschließend wird mithilfe der binären Suche der kleinste Wert für `t` gesuch
 double odil = model.binarySearch(); 
 ```
 
-## 2-Approximation
+### 2-Approximation
 
 Importiere: 
 ```java
@@ -150,7 +152,7 @@ Die Klasse `TwoApproximationAlgorithm` implementiert die Grundmethoden des Algor
 `ApproxBrute` erweitert den 2-Approximationsalgorithmus um Bruteforce.
 
 
-## Gierige Kanten
+### Gierige Kanten
 
 Importiere: 
 ```java
@@ -163,7 +165,7 @@ Der Hauptalgorithmus ist in der Klasse `GreedyAlgorithm` implementiert. Um eine 
 double dilation = GreedyAlgorithm.orient(points);
 ```
 
-## Orientierte Dilatation messen
+### Orientierte Dilatation messen
 
 Importiere: 
 ```java
@@ -176,7 +178,7 @@ Falls bereits eine Punktmenge `points` und eine bestehende Orientierung `String 
 double dilation = OrientedDilation.calculateDilation(points, orientation);
 ```
 
-## Punktmenge aus einer Datei einlesen
+### Punktmenge aus einer Datei einlesen
 
 Importiere: 
 ```java
@@ -195,7 +197,7 @@ Um die erste Punktmenge zu erhalten:
 List<Point> pointSetOne = points.get(0);
 ```
 
-## Messergebnisse speichern
+### Messergebnisse speichern
 
 Importiere: 
 ```java
@@ -228,7 +230,7 @@ Die Klasse `Writer` bietet mehrere Möglichkeiten, Ergebnisse in einer Datei unt
   numberOfPoints;avg;min;max
   ```
 
-## Beispiele
+### Beispiele
 
 Die wichtigsten Klassen haben eine `main`-Methode, die veranschaulicht, wie diese zu benutzen ist.
 
@@ -238,7 +240,7 @@ In der `Main`-Klasse ist folgende Funktionalität für die Experimente implement
 geschrieben, die unter Algorithmennamen in `src/main/resources` angelegt ist.
 
 
-## Erweiterung für 3D Punktmengen
+### Erweiterung für 3D Punktmengen
 
 Die Experimente mit 3D Punktmengen habe ich auf einem zusätzlichen Recher durchgeführt.
 
